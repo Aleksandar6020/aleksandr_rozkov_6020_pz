@@ -1,9 +1,11 @@
 const express = require("express");
-
+const { getManuls, getManul, createManul, updateManul, deleteManul } = require("../controllers/manulController");
+const { protect } = require("../middleware/authMiddleware");
+const { authorize } = require("../middleware/roleMiddleware");
 const router = express.Router();
-
-router.get("/", (req, res) => {
-    res.json({ message: "Manul route" });
-});
-
+router.get("/", getManuls);
+router.get("/:id", getManul);
+router.post("/", protect, authorize("admin"), createManul);
+router.patch("/:id", protect, authorize("admin"), updateManul);
+router.delete("/:id", protect, authorize("admin"), deleteManul);
 module.exports = router;

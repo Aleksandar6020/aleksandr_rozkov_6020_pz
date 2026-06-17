@@ -1,10 +1,24 @@
-class Suggestion {
-    constructor(id, userId, manulId, type) {
-        this.id = id;
-        this.userId = userId;
-        this.manulId = manulId;
-        this.type = type;
-    }
-}
+const mongoose = require("mongoose");
 
-module.exports = Suggestion;
+const suggestionSchema = new mongoose.Schema({
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    manulId: { type: mongoose.Schema.Types.ObjectId, ref: "Manul", required: true },
+    type: { type: String, enum: ["LIKE", "FAVORITE", "STORY"], required: true },
+    content: { type: String, default: "" },
+    status: { type: String, enum: ["PENDING", "APPROVED", "REJECTED"], default: "PENDING" },
+    createdAt: { type: Date, default: Date.now }
+}, { toJSON: { virtuals: true }, toObject: { virtuals: true } });
+
+suggestionSchema.set("toJSON", {
+    virtuals: true,
+    versionKey: false,
+    transform: (doc, ret) => {
+        ret.id = ret._id.toString();
+        ret.userId = ret.userId?.toString();
+        ret.manulId = ret.manulId?.toString();
+        delete ret._id;
+        return ret;
+    }
+});
+
+module.exports = mongoose.model("Suggestion", suggestionSchema);
