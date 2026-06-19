@@ -111,7 +111,6 @@ function AdminPage() {
     const payload = {
       ...form,
       likesCount: 0,
-      favoritesCount: 0,
       createdAt: new Date().toISOString().split('T')[0],
     }
 

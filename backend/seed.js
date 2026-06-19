@@ -4,66 +4,78 @@ const Manul = require("./models/Manul");
 const Suggestion = require("./models/Suggestion");
 
 const manuls = [
-  {
-    name: "Batu",
-    photoUrl: "https://cdn.manulization.com/images/cPpAPBjIVjOvwitg_mar-1_mw-600.webp",
-    shortDescription: "A famous Pallas's cat known for his grumpy expression.",
-    longStory: "Batu is one of the most recognizable manuls, famous for his expressive face and calm behavior. Like all Pallas's cats, he prefers solitude and rocky habitats.",
-    locationType: "ZOO",
-    region: "",
-    tags: ["zoo", "popular"],
-    likesCount: 16,
-    favoritesCount: 5,
-    createdAt: "2024-01-10"
-  },
-  {
-    name: "Wild Manul",
-    photoUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Manoel.jpg",
-    shortDescription: "A wild Pallas's cat from the Mongolian steppes.",
-    longStory: "Wild manuls inhabit cold grasslands and rocky steppes of Central Asia. They are excellent hunters but very sensitive to environmental changes.",
-    locationType: "WILD",
-    region: "Mongolia",
-    tags: ["wild"],
-    likesCount: 23,
-    favoritesCount: 8,
-    createdAt: "2024-02-01"
-  },
-  {
-    name: "Arkas",
-    photoUrl: "https://cdn.manulization.ru/images/8jdAvFBQCGfAInr8_mw-1024.webp",
-    shortDescription: "Bohus and Borsika's son, living at Korkeasaari Zoo.",
-    longStory: "Arkas was born at Budapest Zoo & Botanical Garden and now lives in Korkeasaari Zoo in Helsinki.",
-    locationType: "ZOO",
-    region: "Helsinki, Finland",
-    tags: ["zoo", "helsinki"],
-    likesCount: 1,
-    favoritesCount: 0,
-    createdAt: "2026-01-30"
-  },
-  {
-    name: "Mimi",
-    photoUrl: "https://cdn.manulization.ru/images/HzS5sYiODCJ9ldZg_mw-1024.webp",
-    shortDescription: "Norbu and Pema's daughter, living at Korkeasaari Zoo.",
-    longStory: "Mimi lives in Korkeasaari Zoo and is known as the resident lady of the manul pair.",
-    locationType: "ZOO",
-    region: "Helsinki, Finland",
-    tags: ["zoo", "helsinki"],
-    likesCount: 0,
-    favoritesCount: 0,
-    createdAt: "2026-01-30"
-  },
-  {
-    name: "Eru",
-    photoUrl: "https://cdn.manulization.com/images/tK4vn1LL32kH0kJz_mw-1024.webp",
-    shortDescription: "A Pallas's cat who lives in Higashiyama Zoo and Botanical Gardens.",
-    longStory: "Eru was born in Nasu Animal Kingdom and now lives in Higashiyama Zoo and Botanical Gardens in Japan.",
-    locationType: "ZOO",
-    region: "Japan",
-    tags: ["zoo", "japan"],
-    likesCount: 1,
-    favoritesCount: 0,
-    createdAt: "2026-01-31"
-  }
+    {
+        name: "Batu",
+        photoUrl: "https://cdn.manulization.com/images/cPpAPBjIVjOvwitg_mar-1_mw-600.webp",
+        shortDescription: "A famous Pallas's cat known for his grumpy expression.",
+        longStory: "Batu is one of the most recognizable manuls, famous for his expressive face and calm behavior.",
+        locationType: "ZOO",
+        region: "",
+        tags: ["zoo", "popular"]
+    },
+    {
+        name: "Wild Manul",
+        photoUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Manoel.jpg",
+        shortDescription: "A wild Pallas's cat from the Mongolian steppes.",
+        longStory: "Wild manuls inhabit cold grasslands and rocky steppes of Central Asia.",
+        locationType: "WILD",
+        region: "Mongolia",
+        tags: ["wild"]
+    },
+    {
+        name: "Arkas",
+        photoUrl: "https://cdn.manulization.ru/images/8jdAvFBQCGfAInr8_mw-1024.webp",
+        shortDescription: "Bohus and Borsika's son living at Korkeasaari Zoo.",
+        longStory: "Arkas was born in Budapest Zoo and currently lives in Helsinki.",
+        locationType: "ZOO",
+        region: "Helsinki, Finland",
+        tags: ["zoo", "helsinki"]
+    },
+    {
+        name: "Mimi",
+        photoUrl: "https://cdn.manulization.ru/images/HzS5sYiODCJ9ldZg_mw-1024.webp",
+        shortDescription: "Resident female manul of Korkeasaari Zoo.",
+        longStory: "Mimi was born in Chemnitz Zoo and now lives in Helsinki.",
+        locationType: "ZOO",
+        region: "Helsinki, Finland",
+        tags: ["zoo", "helsinki"]
+    },
+    {
+        name: "Innokentiy (Kesha)",
+        photoUrl: "https://cdn.manulization.ru/images/rcSqdrqXMVhCTYPV_mw-1024.webp",
+        shortDescription: "Well known Russian manul.",
+        longStory: "Born in Novosibirsk Zoo and later transferred to a breeding center.",
+        locationType: "ZOO",
+        region: "Russia",
+        tags: ["zoo", "russia"]
+    },
+    {
+        name: "Bohus",
+        photoUrl: "https://cdn.manulization.ru/images/Wue2TFb9nRH8Z1j6_mw-1024.webp",
+        shortDescription: "Father of Arkas and famous Budapest manul.",
+        longStory: "Bohus was born in Chemnitz Zoo and later moved to Budapest.",
+        locationType: "ZOO",
+        region: "Budapest, Hungary",
+        tags: ["zoo", "hungary"]
+    },
+    {
+        name: "Jihl",
+        photoUrl: "https://cdn.manulization.ru/images/rim0xk7rT4DqsxGj_mw-1024.webp",
+        shortDescription: "Young female manul living in Paris.",
+        longStory: "Born in Jihlava Zoo and later moved to Paris.",
+        locationType: "ZOO",
+        region: "Paris, France",
+        tags: ["zoo", "france"]
+    },
+    {
+        name: "Eru",
+        photoUrl: "https://cdn.manulization.com/images/tK4vn1LL32kH0kJz_mw-1024.webp",
+        shortDescription: "Japanese manul living in Higashiyama Zoo.",
+        longStory: "Eru was born in Nasu Animal Kingdom and later moved to Nagoya.",
+        locationType: "ZOO",
+        region: "Japan",
+        tags: ["zoo", "japan"]
+    }
 ];
 
 const seed = async () => {

@@ -1,10 +1,10 @@
 const express = require("express");
 const { getManuls, getManul, createManul, updateManul, deleteManul } = require("../controllers/manulController");
-const { protect } = require("../middleware/authMiddleware");
+const { protect, optionalAuth } = require("../middleware/authMiddleware");
 const { authorize } = require("../middleware/roleMiddleware");
 const router = express.Router();
 router.get("/", getManuls);
-router.get("/:id", getManul);
+router.get("/:id", optionalAuth, getManul);
 router.post("/", protect, authorize("admin"), createManul);
 router.patch("/:id", protect, authorize("admin"), updateManul);
 router.delete("/:id", protect, authorize("admin"), deleteManul);

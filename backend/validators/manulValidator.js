@@ -10,7 +10,6 @@ const manulSchema = Joi.object({
     region: Joi.string().allow("").optional(),
     tags: Joi.array().items(Joi.string()).optional(),
     likesCount: Joi.number().min(0).optional(),
-    favoritesCount: Joi.number().min(0).optional(),
     createdAt: Joi.date().optional()
 });
 

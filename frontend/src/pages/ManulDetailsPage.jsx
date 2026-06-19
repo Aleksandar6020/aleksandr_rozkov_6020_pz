@@ -19,7 +19,7 @@ function ManulDetailsPage() {
         setError(null)
         const data = await apiFetch(`/manuls/${id}`)
         setManul(data)
-        setLiked(false)
+        setLiked(Boolean(data.likedByCurrentUser))
       } catch (e) {
         setError(e?.message || 'Failed to load manul')
         setManul(null)
@@ -42,6 +42,7 @@ function ManulDetailsPage() {
       setManul((prev) => ({ ...prev, likesCount: prev.likesCount + 1 }))
       setLiked(true)
     } catch (e) {
+      if (e.message === 'You already liked this manul') setLiked(true)
       alert(e.message || 'Like failed')
     }
   }

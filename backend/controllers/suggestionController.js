@@ -21,11 +21,19 @@ const createSuggestion = async (req, res, next) => {
         const { value, error } = suggestionSchema.validate(req.body, { abortEarly: false });
         if (error) return res.status(400).json({ message: error.details.map((d) => d.message).join(", ") });
 
-        const payload = { ...value, userId: req.user?._id || value.userId };
+        const manul = await Manul.findById(value.manulId);
+        if (!manul) return res.status(404).json({ message: "Manul not found" });
+
+        const payload = { ...value, userId: req.user._id };
+
+        if (value.type === "LIKE") {
+            const existingLike = await Suggestion.findOne({ userId: req.user._id, manulId: value.manulId, type: "LIKE" });
+            if (existingLike) return res.status(409).json({ message: "You already liked this manul" });
+        }
+
         const created = await Suggestion.create(payload);
 
         if (value.type === "LIKE") await Manul.findByIdAndUpdate(value.manulId, { $inc: { likesCount: 1 } });
-        if (value.type === "FAVORITE") await Manul.findByIdAndUpdate(value.manulId, { $inc: { favoritesCount: 1 } });
 
         res.status(201).json(created);
     } catch (err) {

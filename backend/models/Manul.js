@@ -10,7 +10,6 @@ const manulSchema = new mongoose.Schema({
     region: { type: String, default: "" },
     tags: [{ type: String }],
     likesCount: { type: Number, default: 0, min: 0 },
-    favoritesCount: { type: Number, default: 0, min: 0 },
     createdAt: { type: Date, default: Date.now }
 }, { toJSON: { virtuals: true }, toObject: { virtuals: true } });
 

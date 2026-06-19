@@ -1,11 +1,13 @@
 const Manul = require("../models/Manul");
+const Suggestion = require("../models/Suggestion");
 const { manulSchema, manulUpdateSchema } = require("../validators/manulValidator");
 
 const getManuls = async (req, res, next) => {
     try {
         const page = Math.max(Number(req.query.page) || 1, 1);
         const limit = Math.min(Math.max(Number(req.query.limit) || 20, 1), 50);
-        const sortBy = req.query.sortBy || "createdAt";
+        const allowedSortFields = ["createdAt", "likesCount", "name"];
+        const sortBy = allowedSortFields.includes(req.query.sortBy) ? req.query.sortBy : "createdAt";
         const order = req.query.order === "asc" ? 1 : -1;
         const filter = {};
 
@@ -28,7 +30,16 @@ const getManul = async (req, res, next) => {
     try {
         const manul = await Manul.findById(req.params.id);
         if (!manul) return res.status(404).json({ message: "Manul not found" });
-        res.json(manul);
+
+        const data = manul.toJSON();
+        data.likedByCurrentUser = false;
+
+        if (req.user?._id) {
+            const like = await Suggestion.exists({ userId: req.user._id, manulId: manul._id, type: "LIKE" });
+            data.likedByCurrentUser = Boolean(like);
+        }
+
+        res.json(data);
     } catch (err) {
         next(err);
     }
